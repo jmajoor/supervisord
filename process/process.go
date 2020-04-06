@@ -395,6 +395,10 @@ func (p *Process) isRunning() bool {
 	if p.cmd != nil && p.cmd.Process != nil {
 		if runtime.GOOS == "windows" {
 			proc, err := os.FindProcess(p.cmd.Process.Pid)
+			if err != nil {
+				return false
+			}
+			defer proc.Release()
 			return proc != nil && err == nil
 		}
 		fmt.Printf("send signal 0 to process\n")
