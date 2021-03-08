@@ -1,6 +1,9 @@
+env:
+  - GO111MODULE=on
 before:
   hooks:
     - go generate ./...
+    - go mod download
 project_name: supervisord
 builds:
 - id: static
@@ -28,6 +31,7 @@ builds:
   - "386"
   - amd64
   - arm
+  - arm64
   goarm:
   - "6"
   - "7"
